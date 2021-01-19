@@ -1,0 +1,25 @@
+#content
+{
+    padding-right: 20px;
+    width: 100%;
+    
+    #selectors
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    
+        >ion-item
+        {
+            >ion-select
+            {
+                padding: 0;
+            }
+            >ion-label
+            {
+                font-size: small;
+                text-overflow: initial;
+            }
+        }
+    }
+}

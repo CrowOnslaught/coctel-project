@@ -1,9 +1,41 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>cocktail-list</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content id=content>
+  <div id='selectors'>
+    <ion-item>
+      <ion-label>Ingredients</ion-label>
+      <ion-select multiple="true" cancelText="Nah" okText="Okay!">
+        <ion-select-option value="bacon">Bacon</ion-select-option>
+        <ion-select-option value="olives">Black Olives</ion-select-option>
+        <ion-select-option value="xcheese">Extra Cheese</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Alcoholic</ion-label>
+      <ion-select>
+        <ion-select-option value="1">1</ion-select-option>
+        <ion-select-option value="2">2</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select>
+        <ion-select-option value="1">1</ion-select-option>
+        <ion-select-option value="2">2</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+  <ion-item>
+    <ion-input placeholder="Search by name"></ion-input>
+  </ion-item>
 
-<ion-content>
-
+  <ion-grid id='cocktails'>
+    <ion-row>
+      <ion-col *ngFor='let c of (cocktails |async)?.drinks' size='6'>
+        <ion-card type='button' class='ion-text-center' 
+        (click)='openDetails(c)'>
+        <ion-img src = '{{c?.strDrinkThumb}}'></ion-img>
+        </ion-card>
+        <p>{{c.strDrink}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
