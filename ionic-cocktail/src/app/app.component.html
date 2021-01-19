@@ -1,0 +1,17 @@
+<ion-content>
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-img slot="start" src='https://picsum.photos/30/30'></ion-img>
+      <ion-buttons slot="end">
+        <div>
+          <ion-button [routerLink]="['/login']">Login</ion-button>
+          <ion-button  [routerLink]="['/register']">Register</ion-button>
+        </div>
+        <ion-button>Log out</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <div id='content'> 
+    <ion-router-outlet></ion-router-outlet>
+  </div>
+</ion-content>

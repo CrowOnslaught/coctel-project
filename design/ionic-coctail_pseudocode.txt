@@ -1,0 +1,57 @@
+app/
+|-> app-routing.module.ts
+|-> app.component (header)
+|-> app.module.ts
+|->	pages
+|	|-> Log
+|	|	|-> Login-form
+|	|	|	|-> Login-form.page
+|	|	|	|-> Login-form-routing.module
+|	|	|-> Register-form
+|	|		|-> Register-form.page
+|	|		|->	register-form-routing.module
+|	|-> User
+|		|-> coktailList
+|		|	|-> coktail-list.page
+|		|	|->	coktail-list-routing.module
+|		|-> Profile
+|		|	|-> profile.page
+|		|	|->	profile-routing.module
+|		|-> YourCocktails
+|		|	|-> yourCocktails.page
+|		|	|->	profile-routing.module
+|		|-> Modals
+|			|-> cocktailDetail-modal
+|				|-> cocktailDetail-modal.page
+|->	shared
+	|-> pages
+	|	|-> Hero
+	|	|	|-> Hero.page
+	|	|	|->	Hero-routing.module
+	|	|-> tabs
+	|		|-> tabs.page
+	|		|-> tabs-routing.module
+	|-> Services
+	|	|-> coktailApi.service.ts
+	|	|-> favorite.service.ts
+	|	|-> user.service.ts 
+	|	|-> photo.service.ts
+	|-> interfaces
+	|	|-> cocktail.ts
+	|	|-> photo.ts
+	|	|-> user.ts
+	|-> guards
+		|-> auth.guard.ts
+	
+	
+________________________
+routing
+	|-> root
+		|-> tabs
+		|	|-> cocktail-list
+		|	|-> your-cocktails
+		|	|-> profile
+		|
+		|-> Hero
+		|->login-form
+		|-> register-form

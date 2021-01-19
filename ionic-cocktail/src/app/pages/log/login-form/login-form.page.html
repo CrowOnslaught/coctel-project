@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login-form</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form #newUserForm="ngForm" id="ngForm" [formGroup]="loginUser" (ngSubmit)="login()">
+    <ion-item>
+      <ion-input type="text" placeholder='Email' formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" placeholder='Phone' formControlName="phone"></ion-input>
+    </ion-item>
+  </form>
+</ion-content>
