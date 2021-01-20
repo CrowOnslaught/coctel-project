@@ -26,7 +26,30 @@ export class LoginFormPage implements OnInit {
   ngOnInit() {
     this.buildForm();
   }
+  loginWithGoogle(){
+    let user = this.loginUser.value;
+    let response = this.fireAuthService.loginWithGoogle();
+    response.then((data)=>{
+      //this.logCom.logIn(true);
+     // Storage.set({key:'logged', value: JSON.stringify(true)});
+      /*data.providerData.forEach(function (profile) {
+        Storage.set({key:'name', value: JSON.stringify(profile.displayName)});
+        Storage.set({key:'email', value: JSON.stringify(profile.email)});
+      });*/
+      //this.openSnackBar("Loggin Successful","successful");
+     // this.route.navigate(['/tabs'])
+     console.log("--------"+data);
+    }).catch((error)=>{
+      console.log(error)
 
+      //this.openSnackBar("Register Error","error");
+    });
+  }
+  loginWithFacebook(){
+    let user = this.loginUser.value;
+    let response = this.fireAuthService.loginWithFacebook();
+   
+  }
   login(){
     let user = this.loginUser.value;
     let response = this.fireAuthService.login(user);

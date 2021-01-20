@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Plugins} from "@capacitor/core" 
+import { Router } from '@angular/router';
 
 const {Storage} = Plugins;
 
@@ -11,7 +12,8 @@ const {Storage} = Plugins;
 export class LogComunicationService {
 
   isLogged = new BehaviorSubject<boolean>(false);
-  constructor() {
+  constructor(private route:Router,
+    ) {
     this.getLogged();
 
    }
@@ -21,6 +23,9 @@ export class LogComunicationService {
     console.log(l_result.value);
     if(JSON.parse(l_result.value)==true){
       this.logIn(true);
+      this.route.navigate(['/tabs']);
+
+
     }
 
    }
