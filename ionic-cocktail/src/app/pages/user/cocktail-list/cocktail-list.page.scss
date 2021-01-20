@@ -1,16 +1,19 @@
 #content
 {
-    padding-right: 20px;
-    width: 100%;
+    
+    padding-right: 2%;
+    width: 98%;
     
     #selectors
     {
+        margin-top: 20px;
         display: flex;
         flex-direction: row;
         justify-content: space-around;
     
         >ion-item
         {
+            width: 30%;
             >ion-select
             {
                 padding: 0;
@@ -21,5 +24,36 @@
                 text-overflow: initial;
             }
         }
+    }
+
+    #cocktails
+    {
+        margin-top: 30px;
+        padding: auto;
+        ion-row
+        {
+            display: flex;
+            justify-content: center;
+
+            .post
+            {
+                ion-card
+                {
+                    margin: 0;
+                    height: 230px;
+                    
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+            
+                    p
+                    {
+                        margin: auto;
+                    }
+                }
+                
+            }
+        }  
     }
 }

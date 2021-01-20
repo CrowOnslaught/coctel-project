@@ -13,14 +13,12 @@ export class CocktailApiService {
 
   getCocktails$(): Observable<any>
   {
-    return this.http.get(this._url+"filter.php?a=Alcoholic");
+    return this.http.get(this._url+"search.php?s=");
   }
 
   getCocktailById$(id): Observable<any>
   {
     return this.http.get(this._url+"lookup.php?i="+id);
-    //    return this.http.get(this._url+"filter.php?a=Alcoholic").subscribe((result)=>{});
-
   }
 
   getCocktailByName$(name): Observable<any>

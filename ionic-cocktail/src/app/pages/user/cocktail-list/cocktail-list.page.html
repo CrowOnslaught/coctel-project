@@ -1,41 +1,54 @@
 <ion-content id=content>
   <div id='selectors'>
     <ion-item>
-      <ion-label>Ingredients</ion-label>
-      <ion-select multiple="true" cancelText="Nah" okText="Okay!">
-        <ion-select-option value="bacon">Bacon</ion-select-option>
-        <ion-select-option value="olives">Black Olives</ion-select-option>
-        <ion-select-option value="xcheese">Extra Cheese</ion-select-option>
+      <ion-select 
+        [interfaceOptions]='ingredientAlertOptions' 
+        placeholder='Ingredients' 
+        multiple="true"
+        (ionChange)="onIngredient($event)">
+        <ion-select-option *ngFor='let i of (ingredients | async)?.drinks' [value]='i'>{{i.strIngredient1}}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Alcoholic</ion-label>
-      <ion-select>
-        <ion-select-option value="1">1</ion-select-option>
-        <ion-select-option value="2">2</ion-select-option>
+      <ion-select [interfaceOptions]='alcoholicAlertOptions' placeholder="Alcoholic" (ionChange)="onAlcoholic($event)">
+        <ion-select-option *ngFor='let i of (alcoholic | async)?.drinks' [value]='i'>{{i.strAlcoholic}}</ion-select-option>
+        <ion-select-option>Any</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Category</ion-label>
-      <ion-select>
-        <ion-select-option value="1">1</ion-select-option>
-        <ion-select-option value="2">2</ion-select-option>
+      <ion-select [interfaceOptions]='categoryAlertOptions' placeholder="Category" (ionChange)="onCategory($event)">
+        <ion-select-option *ngFor='let i of (category | async)?.drinks' [value]='i'>{{i.strCategory}}</ion-select-option>
+        <ion-select-option>Any</ion-select-option>
       </ion-select>
     </ion-item>
   </div>
   <ion-item>
-    <ion-input placeholder="Search by name"></ion-input>
+    <ion-input placeholder="Search by name" (input)='onName($event)'></ion-input>
   </ion-item>
 
   <ion-grid id='cocktails'>
     <ion-row>
-      <ion-col *ngFor='let c of (cocktails |async)?.drinks' size='6'>
-        <ion-card type='button' class='ion-text-center' 
-        (click)='openDetails(c)'>
-        <ion-img src = '{{c?.strDrinkThumb}}'></ion-img>
+      <ion-col class='post' *ngFor="let c of POSTS | filter: ingredientSelected : alcoholicSelected : categorySelected : nameSelected | paginate : {
+        itemsPerPage: tableSize,
+        currentPage: page,
+        totalItems: count
+      };" size='6'>
+        <ion-card type='button' class='ion-text-center' (click)='openDetails(c)'>
+          <ion-img src = '{{c?.strDrinkThumb}}'></ion-img>
+          <p>{{c.strDrink}}</p>
         </ion-card>
-        <p>{{c.strDrink}}</p>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+  
+<ion-footer class="ion-no-border" >
+  <ion-toolbar color='primary'>
+    <pagination-controls  style="text-align: center"
+    responsive="true" 
+    previousLabel="Prev" 
+    nextLabel="Next" 
+    (pageChange)="onTableDataChange($event)">
+  </pagination-controls>
+  </ion-toolbar>
+</ion-footer>
