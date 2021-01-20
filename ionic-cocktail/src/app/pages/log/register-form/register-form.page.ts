@@ -1,3 +1,4 @@
+import { FireAuthService } from './../../../shared/services/firebase/fire-auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -11,22 +12,24 @@ export class RegisterFormPage implements OnInit {
 
   registerUser: FormGroup;
 
-  constructor(private fb: FormBuilder,private route: Router) { }
+  constructor(private fb: FormBuilder,
+              private route: Router,
+              private fireAuthService: FireAuthService) { }
 
   ngOnInit() {
     this.buildForm();
   }
 
 
-  register(user){
-    /*let response = this.fireAuthService.register(user);
+  register(){
+    let user = this.registerUser.value;
+    let response = this.fireAuthService.register(user);
     response.then(data=>{
-      this.route.navigate(["/users/login"]);
-      this.openSnackBar("Register Successful","successful");
+      this.route.navigate(["/login"]);
+      //this.openSnackBar("Register Successful","successful");
     })
       .catch((error) => {
-        this.openSnackBar("Register Error","error");
-
+        //this.openSnackBar("Register Error","error");
     })
     //this.route.navigate(['/home']);*/
   }
