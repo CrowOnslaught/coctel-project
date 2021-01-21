@@ -76,7 +76,6 @@ export class LoginFormPage implements OnInit {
       this.insertToStorage("name",data.providerData[0].displayName);
       this.insertToStorage("email",data.providerData[0].email);
 
-    
       //this.openSnackBar("Loggin Successful","successful");
       this.route.navigate(['/tabs'])
     }).catch((error)=>{
