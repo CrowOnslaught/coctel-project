@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <form #newUserForm="ngForm" [formGroup]="registerUser" (ngSubmit)="register()">
+  <form  [formGroup]="registerUser" (ngSubmit)="register()">
     <ion-item>
       <ion-input  placeholder='Name' formControlName="name"></ion-input>
     </ion-item>
@@ -13,10 +13,11 @@
       <ion-input  placeholder='Email' formControlName="email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input  placeholder='Password' formControlName="password"></ion-input>
+      <ion-input type="password" placeholder='Password' formControlName="password"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input placeholder='Comfirm Password' formControlName="comfirmPassword"></ion-input>
+      <ion-input type="password" placeholder='Comfirm Password' formControlName="confirm_password"></ion-input>
     </ion-item>
+    <ion-button [disabled]="registerUser.invalid"  type="submit">Register</ion-button>
   </form>
 </ion-content>

@@ -1,10 +1,15 @@
 <ion-content>
-  <form #newUserForm="ngForm" id="ngForm" [formGroup]="loginUser" (ngSubmit)="login()">
+  <form  [formGroup]="loginUser" (ngSubmit)="login()">
     <ion-item>
       <ion-input type="text" placeholder='Email' formControlName="email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder='Phone' formControlName="phone"></ion-input>
+      <ion-input type="password" placeholder='Password' formControlName="password"></ion-input>
     </ion-item>
+    <ion-button [disabled]="loginUser.invalid"  type="submit">Login</ion-button>
+    <ion-button   (click)="loginWithGoogle()">loginWithGoogle</ion-button>
+    <ion-button   (click)="loginWithFacebook()">facebook</ion-button>
+
   </form>
+  
 </ion-content>
