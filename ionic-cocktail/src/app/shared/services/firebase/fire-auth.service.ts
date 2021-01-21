@@ -41,6 +41,7 @@ export class FireAuthService {
     return this.afAuth.signInWithPopup(provider)
     //google additionalUserInfo.profile.email = "jordienmo@gmail.com"
     //google additionalUserInfo.profile.given_name =  "Jordi"
+    //facebook 
     .then((result) => {
       console.log(result);
       
