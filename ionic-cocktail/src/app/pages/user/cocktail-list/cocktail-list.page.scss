@@ -6,10 +6,10 @@
     
     #selectors
     {
-        margin-top: 20px;
+        margin-top: 10px;
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
     
         >ion-item
         {
@@ -23,7 +23,13 @@
                 font-size: small;
                 text-overflow: initial;
             }
+
         }
+    }
+
+    #nameInput
+    {
+        margin-top: 10px;
     }
 
     #cocktails
@@ -55,5 +61,17 @@
                 
             }
         }  
+    }
+}
+ion-footer
+{
+    >ion-toolbar
+    {
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: -78px;
+        width: 130%;
     }
 }

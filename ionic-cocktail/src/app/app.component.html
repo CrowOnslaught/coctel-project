@@ -1,7 +1,7 @@
 <ion-app>
   <ion-header>
     <ion-toolbar>    
-      <ion-img slot="start" src='https://picsum.photos/30/30'></ion-img>
+      <ion-img [routerLink]="['']" slot="start" src='assets/appIcon.png'></ion-img>
       <ion-buttons slot="end">
         <div *ngIf="isLogged==false">
           <ion-button [routerLink]="['/login']">Login</ion-button>

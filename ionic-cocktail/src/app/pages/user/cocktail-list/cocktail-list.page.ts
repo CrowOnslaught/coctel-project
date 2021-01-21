@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CocktailApiService } from 'src/app/shared/services/cocktail-api.service';
 import { map } from 'rxjs/operators';
+import { CocktailDetailPage } from '../modals/cocktail-detail/cocktail-detail.page';
+import { ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -25,12 +27,23 @@ export class CocktailListPage implements OnInit {
   categorySelected = '';
   nameSelected = '';
 
-  constructor(private cas : CocktailApiService) { }
+  constructor(private cas : CocktailApiService, private mc : ModalController) { }
 
   ngOnInit() 
   {
     this.fetchPosts();
-    this.ingredients = this.cas.getIngredientsList$();
+    this.ingredients = this.cas.getIngredientsList$()
+                                .pipe(
+                                  map(e =>
+                                    {
+                                      e.drinks.sort(function(a, b){
+                                        if(a.strIngredient1.toLowerCase() < b.strIngredient1.toLowerCase()) { return -1; }
+                                        if(a.strIngredient1.toLowerCase() > b.strIngredient1.toLowerCase()) { return 1; }
+                                        return 0;
+                                    })
+                                    return e;
+                                    })
+                                );
     this.alcoholic = this.cas.getAlcoholicList$();
     this.category = this.cas.getCategoriesList$();
   }
@@ -39,6 +52,7 @@ export class CocktailListPage implements OnInit {
   {
     this.cas.getCocktails$().subscribe(response => {
           this.POSTS = response.drinks;
+          console.log(this.POSTS);
         },
         error => {
           console.log(error);
@@ -47,42 +61,53 @@ export class CocktailListPage implements OnInit {
   }
   onTableDataChange(event){
     this.page = event;
-    this.fetchPosts();
+    //this.fetchPosts();
   }  
 
 
-  openDetails(c)
+  async openDetails(c)
   {
     console.log(c);
+      const l_modal = await this.mc.create
+      ({
+        component:CocktailDetailPage,
+        componentProps: 
+        {
+          'cocktail': c
+        }
+      });
+      l_modal.present();  
   }
 
   onIngredient($event)
   {
+    this.page = 1;
+
     this.ingredientSelected=($event.target.value);
-    console.log(this.ingredientSelected);
   }
   onAlcoholic($event)
   {
+    this.page = 1;
+
     if($event.target.value != 'Any')
       this.alcoholicSelected = $event.target.value.strAlcoholic;
     else
     this.alcoholicSelected = '';
-    
-    console.log(this.alcoholicSelected);
-  }
+    }
   onCategory($event)
   {
+    this.page = 1;
+
     if($event.target.value != 'Any')
       this.categorySelected = $event.target.value.strCategory;
     else
     this.categorySelected = '';
-    
-    console.log(this.categorySelected);
-  }
+    }
   onName($event)
   {
+    this.page = 1;
+
     this.nameSelected = $event.target.value;
-    console.log(this.nameSelected);
   }
 
   ingredientAlertOptions: any = {

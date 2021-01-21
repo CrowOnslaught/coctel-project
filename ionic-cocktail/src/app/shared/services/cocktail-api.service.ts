@@ -26,6 +26,11 @@ export class CocktailApiService {
     return this.http.get(this._url+"search.php?s="+name);
   }
 
+  getRandomCocktail$(): Observable<any>
+  {
+    return this.http.get(this._url+"random.php");
+  }
+
   getCategoriesList$(): Observable<any>
   {
     return this.http.get(this._url+"list.php?c=list");

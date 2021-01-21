@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CocktailDetailPage } from 'src/app/pages/user/modals/cocktail-detail/cocktail-detail.page';
 
 import { TabsPage } from './tabs.page';
 
@@ -16,6 +17,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../../../pages/user/cocktail-list/cocktail-list.module').then( m => m.CocktailListPageModule)
+          },
+          {
+            path: 'detail',
+            loadChildren: () => import('../../../pages/user/modals/cocktail-detail/cocktail-detail.module').then( m => m.CocktailDetailPageModule)
           }
         ],
       },
@@ -46,24 +51,6 @@ const routes: Routes = [
     redirectTo:'tabs/cocktails',
     pathMatch: 'full'
   }
-  /*
-    {
-    path: 'cocktail-list',
-    loadChildren: () => import('./pages/user/cocktail-list/cocktail-list.module').then( m => m.CocktailListPageModule)
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('./pages/user/profile/profile.module').then( m => m.ProfilePageModule)
-  },
-  {
-    path: 'your-cocktails',
-    loadChildren: () => import('./pages/user/your-cocktails/your-cocktails.module').then( m => m.YourCocktailsPageModule)
-  },
-  {
-    path: 'cocktail-detail',
-    loadChildren: () => import('./pages/user/modals/cocktail-detail/cocktail-detail.module').then( m => m.CocktailDetailPageModule)
-  },
-  */
 ];
 
 @NgModule({
