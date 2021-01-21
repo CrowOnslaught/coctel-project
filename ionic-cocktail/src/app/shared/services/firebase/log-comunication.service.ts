@@ -20,6 +20,7 @@ export class LogComunicationService {
 
    async getLogged(){
     const l_result = await Storage.get({key:'logged'});
+
     console.log(l_result.value);
     if(JSON.parse(l_result.value)==true){
       this.logIn(true);

@@ -26,19 +26,22 @@ export class LoginFormPage implements OnInit {
   ngOnInit() {
     this.buildForm();
   }
+  insertToStorage(keyValue,value){
+    Storage.set({key:keyValue, value: JSON.stringify(value)});
+
+  }
   loginWithGoogle(){
     let user = this.loginUser.value;
     let response = this.fireAuthService.loginWithGoogle();
-    response.then((data)=>{
-      //this.logCom.logIn(true);
-     // Storage.set({key:'logged', value: JSON.stringify(true)});
-      /*data.providerData.forEach(function (profile) {
-        Storage.set({key:'name', value: JSON.stringify(profile.displayName)});
-        Storage.set({key:'email', value: JSON.stringify(profile.email)});
-      });*/
+    response.then((data:any)=>{
+       //google additionalUserInfo.profile.email = "jordienmo@gmail.com"
+      //google additionalUserInfo.profile.given_name =  "Jordi"
+      this.logCom.logIn(true);
+     this.insertToStorage("logged",true);
+     this.insertToStorage("name",data.additionalUserInfo?.profile.given_name);
+     this.insertToStorage("email",data.additionalUserInfo.profile.email);
       //this.openSnackBar("Loggin Successful","successful");
-     // this.route.navigate(['/tabs'])
-     console.log("--------"+data);
+     this.route.navigate(['/tabs'])
     }).catch((error)=>{
       console.log(error)
 
@@ -46,8 +49,22 @@ export class LoginFormPage implements OnInit {
     });
   }
   loginWithFacebook(){
+    //facebook additionalUserInfo.profile.email = "jordi_enmo@hotmail.com"
+    //facebook additionalUserInfo.profile.first_name = "Jordi"
     let user = this.loginUser.value;
     let response = this.fireAuthService.loginWithFacebook();
+    response.then((data:any)=>{
+     this.logCom.logIn(true);
+    this.insertToStorage("logged",true);
+    this.insertToStorage("name",data.additionalUserInfo.profile.first_name);
+    this.insertToStorage("email",data.additionalUserInfo.profile.email);
+     //this.openSnackBar("Loggin Successful","successful");
+    this.route.navigate(['/tabs'])
+   }).catch((error)=>{
+     console.log(error)
+
+     //this.openSnackBar("Register Error","error");
+   });
    
   }
   login(){
@@ -55,14 +72,15 @@ export class LoginFormPage implements OnInit {
     let response = this.fireAuthService.login(user);
     response.then(data=>{
       this.logCom.logIn(true);
-      Storage.set({key:'logged', value: JSON.stringify(true)});
-      data.providerData.forEach(function (profile) {
-        Storage.set({key:'name', value: JSON.stringify(profile.displayName)});
-        Storage.set({key:'email', value: JSON.stringify(profile.email)});
-      });
+      this.insertToStorage("logged",true);
+      this.insertToStorage("name",data.providerData[0].displayName);
+      this.insertToStorage("email",data.providerData[0].email);
+
+    
       //this.openSnackBar("Loggin Successful","successful");
       this.route.navigate(['/tabs'])
     }).catch((error)=>{
+      console.log(error)
       //this.openSnackBar("Register Error","error");
     });
   }
