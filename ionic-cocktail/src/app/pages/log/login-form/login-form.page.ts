@@ -3,7 +3,10 @@ import { FireAuthService } from './../../../shared/services/firebase/fire-auth.s
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import "@codetrix-studio/capacitor-google-auth";
+
 import { Plugins} from "@capacitor/core" 
+
 
 const {Storage} = Plugins;
 @Component({
@@ -26,8 +29,11 @@ export class LoginFormPage implements OnInit {
   ngOnInit() {
     this.buildForm();
   }
-  loginWithGoogle(){
-    let user = this.loginUser.value;
+  async loginWithGoogle(){
+    const googleUser = await Plugins.GoogleAuth.signIn();
+    console.log("userGoogle : ", googleUser );
+    
+    /*let user = this.loginUser.value;
     let response = this.fireAuthService.loginWithGoogle();
     response.then((data)=>{
       //this.logCom.logIn(true);
@@ -35,7 +41,7 @@ export class LoginFormPage implements OnInit {
       /*data.providerData.forEach(function (profile) {
         Storage.set({key:'name', value: JSON.stringify(profile.displayName)});
         Storage.set({key:'email', value: JSON.stringify(profile.email)});
-      });*/
+      });
       //this.openSnackBar("Loggin Successful","successful");
      // this.route.navigate(['/tabs'])
      console.log("--------"+data);
@@ -43,7 +49,7 @@ export class LoginFormPage implements OnInit {
       console.log(error)
 
       //this.openSnackBar("Register Error","error");
-    });
+    });*/
   }
   loginWithFacebook(){
     let user = this.loginUser.value;
