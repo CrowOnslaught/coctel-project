@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title (click)="printUser()">profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-img *ngIf="user!=undefined" [src]="user.img"></ion-img>
+  <ion-label (click)="addPhotoToGallery()">ADD PHOTO</ion-label>
+{{user.img}}
 </ion-content>

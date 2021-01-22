@@ -28,7 +28,6 @@ export class LoginFormPage implements OnInit {
   }
   insertToStorage(keyValue,value){
     Storage.set({key:keyValue, value: JSON.stringify(value)});
-
   }
   loginWithGoogle(){
     let user = this.loginUser.value;

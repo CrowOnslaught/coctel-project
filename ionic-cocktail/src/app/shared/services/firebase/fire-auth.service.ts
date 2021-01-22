@@ -34,6 +34,9 @@ export class FireAuthService {
     }
   }
 
+  async getCurrentUser(){
+    return  await this.afAuth.currentUser;
+  }
   AuthLogin(provider) {
     return this.afAuth.signInWithPopup(provider)
     //google additionalUserInfo.profile.email = "jordienmo@gmail.com"
@@ -76,7 +79,7 @@ export class FireAuthService {
     try {
       await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
       const userfirebase= await this.afAuth.currentUser;
-      userfirebase.updateProfile({displayName: user.name});
+      userfirebase.updateProfile({displayName: user.name,photoURL:"../../../../assets/avatar.png"});
       this.logout(false);
       return userfirebase;
 
