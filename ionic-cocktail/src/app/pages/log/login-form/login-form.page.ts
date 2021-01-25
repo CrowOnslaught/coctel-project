@@ -3,7 +3,10 @@ import { FireAuthService } from './../../../shared/services/firebase/fire-auth.s
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import "@codetrix-studio/capacitor-google-auth";
+
 import { Plugins} from "@capacitor/core" 
+
 
 const {Storage} = Plugins;
 @Component({
@@ -29,23 +32,26 @@ export class LoginFormPage implements OnInit {
   insertToStorage(keyValue,value){
     Storage.set({key:keyValue, value: JSON.stringify(value)});
   }
-  loginWithGoogle(){
-    let user = this.loginUser.value;
+  async loginWithGoogle(){
+    const googleUser = await Plugins.GoogleAuth.signIn();
+    console.log("userGoogle : ", googleUser );
+    
+    /*let user = this.loginUser.value;
     let response = this.fireAuthService.loginWithGoogle();
-    response.then((data:any)=>{
-       //google additionalUserInfo.profile.email = "jordienmo@gmail.com"
-      //google additionalUserInfo.profile.given_name =  "Jordi"
-      this.logCom.logIn(true);
-     this.insertToStorage("logged",true);
-     this.insertToStorage("name",data.additionalUserInfo?.profile.given_name);
-     this.insertToStorage("email",data.additionalUserInfo.profile.email);
+    response.then((data)=>{
+      //this.logCom.logIn(true);
+     // Storage.set({key:'logged', value: JSON.stringify(true)});
+      /*data.providerData.forEach(function (profile) {
+        Storage.set({key:'name', value: JSON.stringify(profile.displayName)});
+        Storage.set({key:'email', value: JSON.stringify(profile.email)});
+      });
       //this.openSnackBar("Loggin Successful","successful");
      this.route.navigate(['/tabs'])
     }).catch((error)=>{
       console.log(error)
 
       //this.openSnackBar("Register Error","error");
-    });
+    });*/
   }
   loginWithFacebook(){
     //facebook additionalUserInfo.profile.email = "jordi_enmo@hotmail.com"

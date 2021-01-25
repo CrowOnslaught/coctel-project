@@ -1,7 +1,7 @@
 <ion-content id=content>
   <div id='selectors'>
     <ion-item>
-      <ion-select 
+      <ion-select
         [interfaceOptions]='ingredientAlertOptions' 
         placeholder='Ingredients' 
         multiple="true"
@@ -22,7 +22,7 @@
       </ion-select>
     </ion-item>
   </div>
-  <ion-item>
+  <ion-item id="nameInput">
     <ion-input placeholder="Search by name" (input)='onName($event)'></ion-input>
   </ion-item>
 
