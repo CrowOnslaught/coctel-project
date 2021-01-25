@@ -29,26 +29,27 @@ export class FireAuthService {
     try {
       await this.afAuth.signInWithEmailAndPassword(user.email, user.password);
      return  await this.afAuth.currentUser;
-
     } catch (error) {
       throw error;
-
     }
-
   }
 
+  async getCurrentUser(){
+    return  await this.afAuth.currentUser;
+  }
   AuthLogin(provider) {
     return this.afAuth.signInWithPopup(provider)
     //google additionalUserInfo.profile.email = "jordienmo@gmail.com"
     //google additionalUserInfo.profile.given_name =  "Jordi"
-    //facebook 
-    .then((result) => {
-      console.log(result);
-      
-        console.log('You have been successfully logged in!')
-    }).catch((error) => {
-        console.log(error)
-    })
+    //facebook additionalUserInfo.profile.email = "jordi_enmo@hotmail.com"
+    //facebook additionalUserInfo.profile.first_name = "Jordi"
+    //.then((result) => {
+    //  console.log(result);
+    //  
+    //    console.log('You have been successfully logged in!')
+    //}).catch((error) => {
+    //    console.log(error)
+    //})
   }
 
   async loginWithGoogle() {
@@ -78,7 +79,7 @@ export class FireAuthService {
     try {
       await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
       const userfirebase= await this.afAuth.currentUser;
-      userfirebase.updateProfile({displayName: user.name});
+      userfirebase.updateProfile({displayName: user.name,photoURL:"assets/avatar.png"});
       this.logout(false);
       return userfirebase;
 
