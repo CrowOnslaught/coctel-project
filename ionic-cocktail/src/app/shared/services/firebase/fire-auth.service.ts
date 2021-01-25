@@ -79,7 +79,7 @@ export class FireAuthService {
     try {
       await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
       const userfirebase= await this.afAuth.currentUser;
-      userfirebase.updateProfile({displayName: user.name,photoURL:"../../../../assets/avatar.png"});
+      userfirebase.updateProfile({displayName: user.name,photoURL:"assets/avatar.png"});
       this.logout(false);
       return userfirebase;
 
