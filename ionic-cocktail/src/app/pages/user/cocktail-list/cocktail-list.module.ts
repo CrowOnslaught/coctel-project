@@ -9,6 +9,7 @@ import { CocktailListPageRoutingModule } from './cocktail-list-routing.module';
 import { CocktailListPage } from './cocktail-list.page';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FilterPipe } from 'src/app/shared/pipes/filter.pipe';
+import { CocktailDetailPage } from '../modals/cocktail-detail/cocktail-detail.page';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { FilterPipe } from 'src/app/shared/pipes/filter.pipe';
     CocktailListPageRoutingModule,
     NgxPaginationModule,
   ],
-  declarations: [CocktailListPage, FilterPipe]
+  declarations: [CocktailListPage, FilterPipe, CocktailDetailPage]
 })
 export class CocktailListPageModule {}

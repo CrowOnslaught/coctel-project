@@ -1,9 +1,45 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>your-cocktails</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content id='content'>
+  <div id='selectors'>
+    <ion-item>
+      <ion-select
+        [interfaceOptions]='selectAlertOptions' 
+        placeholder='All' 
+        (ionChange)="onFilter($event)">
+        <ion-select-option [value] = 1>Favorite</ion-select-option>
+        <ion-select-option [value] = 2>Your Cocktails</ion-select-option>
+        <ion-select-option [value] = 0>All</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button color='primary' (click) ='newCocktail()'><ion-icon name="add" style="font-size: 30px;"></ion-icon></ion-button>
+  </div>
+    <ion-item id="nameInput">
+      <ion-input placeholder="Search by name" (input)='onName($event)'></ion-input>
+    </ion-item>
 
-<ion-content>
-
+    <ion-grid id='cocktails'>
+      <ion-row>
+        <ion-col class='post' *ngFor="let c of POSTS | yourCTfilter : nameSelected | paginate : {
+          itemsPerPage: tableSize,
+          currentPage: page,
+          totalItems: count
+        };" size='6'>
+          <ion-card type='button' class='ion-text-center' (click)='openDetails(c)'>
+            <ion-img src = '{{c?.strDrinkThumb}}'></ion-img>
+            <p>{{c.strDrink}}</p>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>
+
+  
+<ion-footer class="ion-no-border" >
+  <ion-toolbar color='primary'>
+    <pagination-controls  style="text-align: center"
+    responsive="true" 
+    previousLabel="Prev" 
+    nextLabel="Next" 
+    (pageChange)="onTableDataChange($event)">
+  </pagination-controls>
+  </ion-toolbar>
+</ion-footer>
