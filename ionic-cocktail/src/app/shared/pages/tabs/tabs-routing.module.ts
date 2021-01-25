@@ -17,10 +17,6 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () => import('../../../pages/user/cocktail-list/cocktail-list.module').then( m => m.CocktailListPageModule)
-          },
-          {
-            path: 'detail',
-            loadChildren: () => import('../../../pages/user/modals/cocktail-detail/cocktail-detail.module').then( m => m.CocktailDetailPageModule)
           }
         ],
       },

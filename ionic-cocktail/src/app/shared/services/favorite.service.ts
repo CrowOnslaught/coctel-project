@@ -11,7 +11,7 @@ export class FavoriteService {
 
   constructor() { }
 
-  async getAllFavorite():Promise<{value:any}>
+  async getAllFavorite()
   {
     const l_result = await Storage.get({key:'FavoriteCocktails'});
 

@@ -1,0 +1,85 @@
+#content
+{
+    
+    padding-right: 2%;
+    width: 98%;
+    
+    #selectors
+    {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    
+        >ion-item
+        {
+            width: 30%;
+            >ion-select
+            {
+                padding: 0;
+            }
+            >ion-label
+            {
+                font-size: small;
+                text-overflow: initial;
+            }
+
+        }
+
+        >ion-button
+        {
+            --border-radius: 50%; 
+            width: 50px; 
+            height: 50px;
+            font-size: 10px;
+        }
+    }
+
+    #nameInput
+    {
+        margin-top: 10px;
+    }
+
+    #cocktails
+    {
+        margin-top: 30px;
+        padding: auto;
+        ion-row
+        {
+            display: flex;
+            justify-content: center;
+
+            .post
+            {
+                ion-card
+                {
+                    margin: 0;
+                    height: 230px;
+                    
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+            
+                    p
+                    {
+                        margin: auto;
+                    }
+                }
+                
+            }
+        }  
+    }
+}
+ion-footer
+{
+    >ion-toolbar
+    {
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: -78px;
+        width: 130%;
+    }
+}

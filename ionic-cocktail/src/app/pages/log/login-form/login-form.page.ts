@@ -3,7 +3,7 @@ import { FireAuthService } from './../../../shared/services/firebase/fire-auth.s
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import "@codetrix-studio/capacitor-google-auth";
+//import "@codetrix-studio/capacitor-google-auth";
 
 import { Plugins} from "@capacitor/core" 
 

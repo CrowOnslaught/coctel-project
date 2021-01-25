@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color = primary>
+    <ion-buttons  slot="start">
+      <button ion-button  icon-only (click)='close()'>
+        <ion-icon name="chevron-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Create Cocktail</ion-title>
+
+    <ion-buttons  slot="end">
+      <!-- <ion-button (click)='logForm()' [disabled]="!newCocktailForm.form?.valid">SAVE</ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="content">
+    <form #newCocktailForm [formGroup]="newCocktail" (ngSubmit)="logForm()">
+      <ion-item id="nameInput">
+        <ion-label position='floating' color='secondary'>Cocktail Name</ion-label>
+        <ion-input formControlName='name' placeholder="Cocktail Name" required></ion-input>
+      </ion-item>
+
+      <ion-item id='img'>
+        <img src="{{photoUrl}}" alt="" srcset="">
+      </ion-item>
+
+      <ion-item>
+        <ion-label  color='secondary' position='floating'>Instructions</ion-label>
+        <ion-textarea formControlName='instructions' placeholder='Write instructions here'></ion-textarea>
+      </ion-item>
+      
+      <div id='ingredientSelector' *ngFor="let item of arrayOne(ingredientNum); let i = index">
+        <ion-item>
+          <ion-select
+            formControlName='ingredient{{i}}'
+            [interfaceOptions]='ingredientAlertOptions' 
+            placeholder='Ingredients' 
+            (ionChange)="onIngredient($event)">
+            <ion-select-option *ngFor='let i of (ingredients | async)?.drinks' [value]='i'>{{i.strIngredient1}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item id="amountInput">
+          <ion-input formControlName='amount{{i}}' placeholder="Amount" required></ion-input>
+        </ion-item>
+      </div>
+
+      <div id="buttons">
+        <ion-button color='secondary' (click)='addIngredientSelector()'> Add ingredient</ion-button>
+        <ion-button *ngIf='ingredientNum>1' color='danger' (click)='removeIngredientSelector()'>Remove</ion-button>
+      </div>
+
+      <ion-item>
+        <ion-label  color='secondary' position='floating'>Alcoholic</ion-label>
+        <ion-select formControlName='alcoholic' [interfaceOptions]='alcoholicAlertOptions' placeholder="select" (ionChange)="onAlcoholic($event)">
+          <ion-select-option *ngFor='let i of (alcoholic | async)?.drinks' [value]='i'>{{i.strAlcoholic}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label  color='secondary' position='floating'>Category</ion-label>
+        <ion-select formControlName='category' [interfaceOptions]='categoryAlertOptions' placeholder="Select" (ionChange)="onCategory($event)">
+          <ion-select-option *ngFor='let i of (category | async)?.drinks' [value]='i'>{{i.strCategory}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </form>
+  </div>
+</ion-content>
