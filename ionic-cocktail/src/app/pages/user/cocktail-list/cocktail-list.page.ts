@@ -16,7 +16,7 @@ export class CocktailListPage implements OnInit {
   POSTS: any;
   page = 1;
   count = 0;
-  tableSize = 4;
+  tableSize = 6;
 
   ingredients: Observable<any>;
   alcoholic:Observable<any>;

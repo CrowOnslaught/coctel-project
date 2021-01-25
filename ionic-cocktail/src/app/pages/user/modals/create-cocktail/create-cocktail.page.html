@@ -31,8 +31,11 @@
         <ion-textarea formControlName='instructions' placeholder='Write instructions here'></ion-textarea>
       </ion-item>
       
-      <div id='ingredientSelector' *ngFor="let item of arrayOne(ingredientNum); let i = index">
-        <ion-item>
+      <ion-label  color='secondary'>Ingredients</ion-label>
+      <div 
+        id='ingredientSelector' 
+        *ngFor="let item of arrayOne(ingredientNum); let i = index">
+        <ion-item *ngIf="i<ingredientNum" >
           <ion-select
             formControlName='ingredient{{i}}'
             [interfaceOptions]='ingredientAlertOptions' 
@@ -40,14 +43,14 @@
             (ionChange)="onIngredient($event)">
             <ion-select-option *ngFor='let i of (ingredients | async)?.drinks' [value]='i'>{{i.strIngredient1}}</ion-select-option>
           </ion-select>
-        </ion-item>
-        <ion-item id="amountInput">
+        </ion-item >
+        <ion-item *ngIf="i<ingredientNum">
           <ion-input formControlName='amount{{i}}' placeholder="Amount" required></ion-input>
         </ion-item>
       </div>
 
       <div id="buttons">
-        <ion-button color='secondary' (click)='addIngredientSelector()'> Add ingredient</ion-button>
+        <ion-button *ngIf='ingredientNum<15' color='secondary' (click)='addIngredientSelector()'> Add ingredient</ion-button>
         <ion-button *ngIf='ingredientNum>1' color='danger' (click)='removeIngredientSelector()'>Remove</ion-button>
       </div>
 

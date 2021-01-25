@@ -46,14 +46,49 @@ export class CreateCocktailPage implements OnInit {
     this.alcoholic = this.cas.getAlcoholicList$();
     this.category = this.cas.getCategoriesList$();
 
+    this.group();
+  }
+
+  group()
+  {
     this.newCocktail = this.fb.group(
       {
         name:['', Validators.required],
         instructions:['', Validators.required],
-        ingredient0:['', Validators.required],
-        amount0:['', Validators.required],
         alcoholic:['', Validators.required],
         category:['', Validators.required],
+
+        ingredient0:['', Validators.required],
+        ingredient1:['', Validators.required],
+        ingredient2:['', Validators.required],
+        ingredient3:['', Validators.required],
+        ingredient4:['', Validators.required],
+        ingredient5:['', Validators.required],
+        ingredient6:['', Validators.required],
+        ingredient7:['', Validators.required],
+        ingredient8:['', Validators.required],
+        ingredient9:['', Validators.required],
+        ingredient10:['', Validators.required],
+        ingredient11:['', Validators.required],
+        ingredient12:['', Validators.required],
+        ingredient13:['', Validators.required],
+        ingredient14:['', Validators.required],
+
+        amount0:['', Validators.required],
+        amount1:['', Validators.required],
+        amount2:['', Validators.required],
+        amount3:['', Validators.required],
+        amount4:['', Validators.required],
+        amount5:['', Validators.required],
+        amount6:['', Validators.required],
+        amount7:['', Validators.required],
+        amount8:['', Validators.required],
+        amount9:['', Validators.required],
+        amount10:['', Validators.required],
+        amount11:['', Validators.required],
+        amount12:['', Validators.required],
+        amount13:['', Validators.required],
+        amount14:['', Validators.required],
       }
     )
   }
@@ -84,7 +119,7 @@ export class CreateCocktailPage implements OnInit {
   }
 
   arrayOne(n: number): any[] {
-    return Array(n);
+    return Array(15);
   }
 
   ingredientAlertOptions: any = {

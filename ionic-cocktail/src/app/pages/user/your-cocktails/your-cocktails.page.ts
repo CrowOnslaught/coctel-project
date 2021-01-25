@@ -17,7 +17,7 @@ export class YourCocktailsPage implements OnInit {
   POSTS: any;
   page = 1;
   count = 0;
-  tableSize = 4;
+  tableSize = 6;
   
   filterSelected : any;
   nameSelected: any = "";
