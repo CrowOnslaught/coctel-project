@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-
+  test;
   user:User;
   constructor(private photoService: PhotoService,
               private fireAuthService: FireAuthService) { }
@@ -21,7 +21,7 @@ export class ProfilePage implements OnInit {
 printUser(){
   let response = this.fireAuthService.getCurrentUser();
     response.then(data=>{
-
+      console.log("AndroidJordi",data);
       console.log(data.providerData[0])
       let dataUser = data.providerData[0];
       //this.user = {name:dataUser.displayName,email:dataUser.email,img: dataUser.photoURL,password:""}

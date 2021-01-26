@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "866539611864",
+    "project_id": "coctel-project",
+    "storage_bucket": "coctel-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:866539611864:android:09aff94fefe5468f5159ad",
+        "android_client_info": {
+          "package_name": "com.cocktail.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "866539611864-haetfeemeujhshi0bvje4oqifnl5a76e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cocktail.app",
+            "certificate_hash": "4003c73799462aef4cc879df92636e3aeec8fe62"
+          }
+        },
+        {
+          "client_id": "866539611864-1q0emq4tt0nispnc17rabbs7ft5798is.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjmnReHZ3xND3b8hq5jzUD__uDiXqJkEc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "866539611864-1q0emq4tt0nispnc17rabbs7ft5798is.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "866539611864-trmdkfmns87dsjc8i923p8hpe5vqjoal.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cocktail.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

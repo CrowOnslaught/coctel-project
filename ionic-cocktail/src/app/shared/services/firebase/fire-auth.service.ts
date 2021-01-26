@@ -11,6 +11,7 @@ import { User } from '../..//model/user';
 
 
 import { Plugins} from "@capacitor/core" 
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 const {Storage} = Plugins;
 
@@ -37,8 +38,13 @@ export class FireAuthService {
   async getCurrentUser(){
     return  await this.afAuth.currentUser;
   }
-  AuthLogin(provider) {
-    return this.afAuth.signInWithPopup(provider)
+  AuthLogin(user) {
+    //return this.afAuth.signInWithPopup(provider)
+
+    var credential = firebase.auth.GoogleAuthProvider.credential(
+      user.idToken);
+
+    return this.afAuth.signInWithCredential(credential);
     //google additionalUserInfo.profile.email = "jordienmo@gmail.com"
     //google additionalUserInfo.profile.given_name =  "Jordi"
     //facebook additionalUserInfo.profile.email = "jordi_enmo@hotmail.com"
@@ -52,8 +58,9 @@ export class FireAuthService {
     //})
   }
 
-  async loginWithGoogle() {
-   return this.AuthLogin(new firebase.auth.GoogleAuthProvider());
+  async loginWithGoogle(user) {
+
+   return this.AuthLogin(user);
 
   }
 

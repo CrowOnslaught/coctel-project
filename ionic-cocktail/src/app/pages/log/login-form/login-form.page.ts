@@ -3,7 +3,7 @@ import { FireAuthService } from './../../../shared/services/firebase/fire-auth.s
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-//import "@codetrix-studio/capacitor-google-auth";
+import "@codetrix-studio/capacitor-google-auth";
 
 import { Plugins} from "@capacitor/core" 
 
@@ -16,6 +16,7 @@ const {Storage} = Plugins;
 })
 export class LoginFormPage implements OnInit {
 
+  googleUser;
   loginUser: FormGroup;
 
   constructor(private fb: FormBuilder,
@@ -30,12 +31,37 @@ export class LoginFormPage implements OnInit {
     this.buildForm();
   }
   insertToStorage(keyValue,value){
-    Storage.set({key:keyValue, value: JSON.stringify(value)});
+    Storage.set({key:keyValue, value: value});
   }
   async loginWithGoogle(){
+     //google additionalUserInfo.profile.email = "jordienmo@gmail.com"
+    //google additionalUserInfo.profile.given_name =  "Jordi"
     const googleUser = await Plugins.GoogleAuth.signIn();
-    console.log("userGoogle : ", googleUser );
-    
+    console.log("userGoogle : ", googleUser.givenName );
+    this.googleUser = googleUser;
+    if(googleUser!=null){
+
+     let dataGoogle = this.fireAuthService.loginWithGoogle(googleUser);
+     dataGoogle.
+     then(
+       data=>
+       {
+        this.logCom.logIn(true);
+        this.insertToStorage("logged",true);
+        this.insertToStorage("name",googleUser.givenName);
+        this.insertToStorage("email",googleUser.email);
+         //this.openSnackBar("Loggin Successful","successful");
+        this.route.navigate(['/tabs'])
+       }
+       ).catch();
+     
+     /* this.logCom.logIn(true);
+      this.insertToStorage("logged",true);
+      this.insertToStorage("name",googleUser.givenName);
+      this.insertToStorage("email",googleUser.email);*/
+       //this.openSnackBar("Loggin Successful","successful");
+      //this.route.navigate(['/tabs'])
+    }
     /*let user = this.loginUser.value;
     let response = this.fireAuthService.loginWithGoogle();
     response.then((data)=>{
