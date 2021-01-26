@@ -27,9 +27,9 @@ export class CreateCocktailPage implements OnInit {
   ingredientNum=1;
 
   newCocktail : FormGroup;
-  photoUrl : SafeUrl = this.sanitizer.bypassSecurityTrustUrl('https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image-620x600.jpg');
+  photoUrl :string = /*: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(*/'https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image-620x600.jpg'/*)*/;
 
-  constructor(private sanitizer: DomSanitizer, private lc: LocalCocktailsService, private photoService: PhotoService, private fb: FormBuilder,private cas : CocktailApiService, private mc : ModalController) 
+  constructor(/*private sanitizer: DomSanitizer, */private lc: LocalCocktailsService, private photoService: PhotoService, private fb: FormBuilder,private cas : CocktailApiService, private mc : ModalController) 
   {
   }
 
