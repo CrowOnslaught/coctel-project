@@ -25,13 +25,44 @@ export class YourCocktailsPage implements OnInit {
   filterSelected : any;
   nameSelected: any = "";
 
+  routeResolveData :any;
+  sceneLoaded=false;
+
   constructor(private lc: LocalCocktailsService,private cas : CocktailApiService, private fs : FavoriteService, private mc : ModalController, private route : ActivatedRoute) { }
 
   ngOnInit()
   {
+    //Non-Blocking resolver
+    if(this.route && this.route.data){
+  
+      const promiseObservable = this.route.data;    
+
+      if(promiseObservable){
+
+        promiseObservable.subscribe(promiseValue =>{
+          const dataObservable = promiseValue['items'];
+          if(dataObservable){
+            dataObservable.subscribe(observableValue =>{
+              const pageData: any = observableValue;
+              if(pageData){
+                this.routeResolveData = pageData;
+              }
+            });
+          }
+        });
+      }
+    }
+    //Resolver End
+
+    
     this.route.queryParams.subscribe(params => {
+      this.sceneLoaded=false;
       this.fetchPosts();
+      setTimeout(() => {
+        this.sceneLoaded=true;
+      }, (1000));
     });
+
   }
 
   async fetchPosts()
@@ -72,6 +103,11 @@ export class YourCocktailsPage implements OnInit {
   }
   onTableDataChange(event){
     this.page = event;
+    this.sceneLoaded =false;
+
+    setTimeout(() => {
+      this.sceneLoaded= true;  
+    }, (400));  
   }  
 
   async openDetails(c)
@@ -84,7 +120,16 @@ export class YourCocktailsPage implements OnInit {
           'cocktail': c
         }
       });
-      l_modal.present();  
+      l_modal.present();
+      const {data} = await l_modal.onWillDismiss()
+      if(data != null)
+      {
+        this.sceneLoaded=false;
+        this.fetchPosts();
+        setTimeout(() => {
+          this.sceneLoaded=true;
+        }, (1000));
+      }  
   }
   async newCocktail()
   {
@@ -92,7 +137,17 @@ export class YourCocktailsPage implements OnInit {
     ({
       component:CreateCocktailPage,
     });
-    l_modal.present();    }
+    l_modal.present();
+    const {data} = await l_modal.onWillDismiss()
+    if(data != null)
+    {
+      this.sceneLoaded=false;
+      this.fetchPosts();
+      setTimeout(() => {
+        this.sceneLoaded=true;
+      }, (1000));
+    }  
+  }
 
   onFilter($event)
   {

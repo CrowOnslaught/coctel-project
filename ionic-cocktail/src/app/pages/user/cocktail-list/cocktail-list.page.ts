@@ -4,6 +4,7 @@ import { CocktailApiService } from 'src/app/shared/services/cocktail-api.service
 import { map } from 'rxjs/operators';
 import { CocktailDetailPage } from '../modals/cocktail-detail/cocktail-detail.page';
 import { ModalController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -27,10 +28,35 @@ export class CocktailListPage implements OnInit {
   categorySelected = '';
   nameSelected = '';
 
-  constructor(private cas : CocktailApiService, private mc : ModalController) { }
+  routeResolveData :any;
+  sceneLoaded = false;
+
+  constructor(private route: ActivatedRoute,private cas : CocktailApiService, private mc : ModalController) { }
 
   ngOnInit() 
   {
+    //Non-Blocking resolver
+    if(this.route && this.route.data){
+  
+      const promiseObservable = this.route.data;    
+
+      if(promiseObservable){
+
+        promiseObservable.subscribe(promiseValue =>{
+          const dataObservable = promiseValue['items'];
+          if(dataObservable){
+            dataObservable.subscribe(observableValue =>{
+              const pageData: any = observableValue;
+              if(pageData){
+                this.routeResolveData = pageData;
+              }
+            });
+          }
+        });
+      }
+    }
+    //Resolver End
+
     this.fetchPosts();
     this.ingredients = this.cas.getIngredientsList$()
                                 .pipe(
@@ -46,6 +72,10 @@ export class CocktailListPage implements OnInit {
                                 );
     this.alcoholic = this.cas.getAlcoholicList$();
     this.category = this.cas.getCategoriesList$();
+    setTimeout(() => {
+    this.sceneLoaded= true;  
+  }, (1000));
+
   }
 
   fetchPosts():void
@@ -61,7 +91,11 @@ export class CocktailListPage implements OnInit {
   }
   onTableDataChange(event){
     this.page = event;
-    //this.fetchPosts();
+    this.sceneLoaded =false;
+
+    setTimeout(() => {
+      this.sceneLoaded= true;  
+    }, (400));
   }  
 
 
@@ -125,4 +159,6 @@ export class CocktailListPage implements OnInit {
     subHeader: 'Select a Category',
     translucent: false
   };
+
+
 }

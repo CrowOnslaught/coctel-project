@@ -88,7 +88,9 @@ export class CocktailDetailPage implements OnInit {
 
   close()
   {
-    this.mc.dismiss();
+    this.mc.dismiss({
+      flag: true,
+    });  
   }
 
   async addFavorite(fav :boolean)
