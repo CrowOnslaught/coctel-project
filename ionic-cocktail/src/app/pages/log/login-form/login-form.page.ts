@@ -40,12 +40,14 @@ export class LoginFormPage implements OnInit {
     console.log("userGoogle : ", googleUser.givenName );
     this.googleUser = googleUser;
     if(googleUser!=null){
+      console.log("jordi_googleUser: ",googleUser)
 
      let dataGoogle = this.fireAuthService.loginWithGoogle(googleUser);
      dataGoogle.
      then(
        data=>
        {
+        console.log("jordi_data: ",data)
         this.logCom.logIn(true);
         this.insertToStorage("logged",true);
         this.insertToStorage("name",googleUser.givenName);
@@ -53,7 +55,7 @@ export class LoginFormPage implements OnInit {
          //this.openSnackBar("Loggin Successful","successful");
         this.route.navigate(['/tabs'])
        }
-       ).catch();
+       ).catch(error=>console.log("jordi_Eror: ",error));
      
      /* this.logCom.logIn(true);
       this.insertToStorage("logged",true);

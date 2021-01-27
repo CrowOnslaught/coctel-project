@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ionic-cocktail</string>
+    <string name="title_activity_main">ionic-cocktail</string>
+    <string name="package_name">com.cocktail.app</string>
+    <string name="custom_url_scheme">com.cocktail.app</string>
+    <string name="server_client_id">866539611864-1q0emq4tt0nispnc17rabbs7ft5798is.apps.googleusercontent.com</string>
+</resources>

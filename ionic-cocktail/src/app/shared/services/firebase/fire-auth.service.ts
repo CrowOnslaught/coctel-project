@@ -41,8 +41,17 @@ export class FireAuthService {
   AuthLogin(user) {
     //return this.afAuth.signInWithPopup(provider)
 
-    var credential = firebase.auth.GoogleAuthProvider.credential(
-      user.idToken);
+    console.log("jordi_token1: ",user.idToken)
+    let credential;
+    if(user.idToken==null || user.idToken==undefined ){
+       credential = firebase.auth.GoogleAuthProvider.credential(
+        user.authentication.idToken);
+    }else{
+       credential = firebase.auth.GoogleAuthProvider.credential(
+        user.idToken);
+    }
+    
+      console.log("jordi_token2: ",user.idToken)
 
     return this.afAuth.signInWithCredential(credential);
     //google additionalUserInfo.profile.email = "jordienmo@gmail.com"
