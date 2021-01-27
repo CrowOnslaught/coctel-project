@@ -106,6 +106,24 @@ export class FireAuthService {
 
 
   }
+  async updateProfile(user): Promise<any>{
+    try {
+     
+      const userfirebase= await this.afAuth.currentUser;
+      console.log(user);
+      userfirebase.updateProfile({displayName: user.name});
+      
+      console.log(userfirebase);
+     // userfirebase.;
+
+     // updateUser
+      return userfirebase;
+
+    } catch (error) {
+      throw error;
+
+    }
+  }
 
   isLogged$():Observable<any> {
     return this.afAuth.authState.pipe(first());

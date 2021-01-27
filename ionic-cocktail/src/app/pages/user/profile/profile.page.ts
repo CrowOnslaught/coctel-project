@@ -2,6 +2,8 @@ import { User } from './../../../shared/model/user';
 import { FireAuthService } from './../../../shared/services/firebase/fire-auth.service';
 import { PhotoService } from './../../../shared/services/photo/photo.service';
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { UpdateProfilePage } from '../modals/update-profile/update-profile.page';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +14,8 @@ export class ProfilePage implements OnInit {
   test;
   user:User;
   constructor(private photoService: PhotoService,
-              private fireAuthService: FireAuthService) { }
+              private fireAuthService: FireAuthService,
+              private mc : ModalController) { }
 
   ngOnInit() {
     this.getUser();
@@ -47,12 +50,7 @@ printUser(){
     });
   }
 
-  async updatefirstPhoto(){
-    let url = "assets/avatar.png";
-    const userfirebase= await this.fireAuthService.getCurrentUser()
-    userfirebase.updateProfile({photoURL:url});
-    this.user.img = url;
-  }
+
   async updatePhoto(data){
     const userfirebase= await this.fireAuthService.getCurrentUser()
     userfirebase.updateProfile({photoURL:data});
@@ -64,6 +62,23 @@ printUser(){
     image.then((data) => {
       this.updatePhoto(data);
     });
+  }
+
+  async newUpdateProfile()
+  {
+    const l_modal = await this.mc.create
+    ({
+      component:UpdateProfilePage,
+    });
+    l_modal.present();
+    const { data } = await l_modal.onWillDismiss();
+    if(data!=null){
+      if(data.flag){
+
+        this.user.name=data.name
+      }
+    }
+    
   }
 
 }

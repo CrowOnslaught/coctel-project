@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color = primary>
+    <ion-buttons  slot="start">
+      <button ion-button  icon-only (click)='close()'>
+        <ion-icon name="chevron-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Update Cocktail</ion-title>
+
+    <ion-buttons  slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <form [formGroup]="profileForm" >
+    <ion-item>
+      <ion-input type="text"  placeholder='Name'  formControlName="name"></ion-input>
+    </ion-item>
+    <ion-button [disabled]="!profileForm.valid" (click)="update()">Update</ion-button>
+
+  </form>
+</ion-content>
+ 
