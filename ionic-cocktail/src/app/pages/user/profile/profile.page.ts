@@ -48,7 +48,7 @@ printUser(){
   }
 
   async updatefirstPhoto(){
-    let url = "../../../../assets/avatar.png";
+    let url = "assets/avatar.png";
     const userfirebase= await this.fireAuthService.getCurrentUser()
     userfirebase.updateProfile({photoURL:url});
     this.user.img = url;

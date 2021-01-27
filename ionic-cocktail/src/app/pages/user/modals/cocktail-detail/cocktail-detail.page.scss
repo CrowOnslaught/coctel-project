@@ -38,7 +38,7 @@ ion-header
             background-color: transparent;
             >ion-icon
             {
-                color:white;
+                color: var(--ion-text-color, #000);
                 font-size: 30px;
             }
         }

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Cocktail } from 'src/app/shared/model/cocktail';
 import { CocktailApiService } from 'src/app/shared/services/cocktail-api.service';
+import { LocalCocktailsService } from 'src/app/shared/services/local-cocktails.service';
+import { PhotoService } from 'src/app/shared/services/photo/photo.service';
 
 @Component({
   selector: 'app-create-cocktail',
@@ -23,9 +27,9 @@ export class CreateCocktailPage implements OnInit {
   ingredientNum=1;
 
   newCocktail : FormGroup;
-  photoUrl : string = 'https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image-620x600.jpg';
+  photoUrl :string = /*: SafeUrl = this.sanitizer.bypassSecurityTrustUrl(*/'https://redzonekickboxing.com/wp-content/uploads/2017/04/default-image-620x600.jpg'/*)*/;
 
-  constructor(private fb: FormBuilder,private cas : CocktailApiService, private mc : ModalController) 
+  constructor(/*private sanitizer: DomSanitizer, */private lc: LocalCocktailsService, private photoService: PhotoService, private fb: FormBuilder,private cas : CocktailApiService, private mc : ModalController) 
   {
   }
 
@@ -57,45 +61,50 @@ export class CreateCocktailPage implements OnInit {
         instructions:['', Validators.required],
         alcoholic:['', Validators.required],
         category:['', Validators.required],
+        image:[this.photoUrl],
 
-        ingredient0:['', Validators.required],
-        ingredient1:['', Validators.required],
-        ingredient2:['', Validators.required],
-        ingredient3:['', Validators.required],
-        ingredient4:['', Validators.required],
-        ingredient5:['', Validators.required],
-        ingredient6:['', Validators.required],
-        ingredient7:['', Validators.required],
-        ingredient8:['', Validators.required],
-        ingredient9:['', Validators.required],
-        ingredient10:['', Validators.required],
-        ingredient11:['', Validators.required],
-        ingredient12:['', Validators.required],
-        ingredient13:['', Validators.required],
-        ingredient14:['', Validators.required],
+        ingredient0:[null, Validators.required],
+        ingredient1:[null],
+        ingredient2:[null],
+        ingredient3:[null],
+        ingredient4:[null],
+        ingredient5:[null],
+        ingredient6:[null],
+        ingredient7:[null],
+        ingredient8:[null],
+        ingredient9:[null],
+        ingredient10:[null],
+        ingredient11:[null],
+        ingredient12:[null],
+        ingredient13:[null],
+        ingredient14:[null],
 
-        amount0:['', Validators.required],
-        amount1:['', Validators.required],
-        amount2:['', Validators.required],
-        amount3:['', Validators.required],
-        amount4:['', Validators.required],
-        amount5:['', Validators.required],
-        amount6:['', Validators.required],
-        amount7:['', Validators.required],
-        amount8:['', Validators.required],
-        amount9:['', Validators.required],
-        amount10:['', Validators.required],
-        amount11:['', Validators.required],
-        amount12:['', Validators.required],
-        amount13:['', Validators.required],
-        amount14:['', Validators.required],
+        amount0:[null, Validators.required],
+        amount1:[null],
+        amount2:[null],
+        amount3:[null],
+        amount4:[null],
+        amount5:[null],
+        amount6:[null],
+        amount7:[null],
+        amount8:[null],
+        amount9:[null],
+        amount10:[null],
+        amount11:[null],
+        amount12:[null],
+        amount13:[null],
+        amount14:[null],
       }
     )
   }
 
   logForm()
   {
-    
+    let l_cocktail : Cocktail = new Cocktail(this.newCocktail);
+    console.log(l_cocktail);
+
+    this.lc.setCocktail(l_cocktail);
+    this.mc.dismiss();
   }
   close()
   {
@@ -103,7 +112,8 @@ export class CreateCocktailPage implements OnInit {
   }
 
   onIngredient()
-  {}
+  {
+  }
   onAlcoholic()
   {}
   onCategory()
@@ -118,13 +128,24 @@ export class CreateCocktailPage implements OnInit {
     this.ingredientNum++;
   }
 
+
+  addPhotoToGallery() {
+    let image = this.photoService.addNewToGallery();
+    image.then(data => 
+      {
+        //let l_safeUrl= this.sanitizer.bypassSecurityTrustUrl(data);
+        this.photoUrl = data;//l_safeUrl;
+        this.newCocktail.get("image").setValue(this.photoUrl);   
+      });
+  }
+
   arrayOne(n: number): any[] {
     return Array(15);
   }
 
   ingredientAlertOptions: any = {
     header: 'Ingredients',
-    subHeader: 'Select all your ingredients',
+    subHeader: 'Select an ingredients',
     translucent: false
   };
   alcoholicAlertOptions: any = {

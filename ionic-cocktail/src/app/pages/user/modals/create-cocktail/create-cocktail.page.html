@@ -9,21 +9,23 @@
     <ion-title>Create Cocktail</ion-title>
 
     <ion-buttons  slot="end">
-      <!-- <ion-button (click)='logForm()' [disabled]="!newCocktailForm.form?.valid">SAVE</ion-button> -->
+      <ion-button (click)='logForm()' [disabled]="!newCocktail.valid">SAVE</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div id="content">
-    <form #newCocktailForm [formGroup]="newCocktail" (ngSubmit)="logForm()">
+    <form [formGroup]="newCocktail">
       <ion-item id="nameInput">
         <ion-label position='floating' color='secondary'>Cocktail Name</ion-label>
         <ion-input formControlName='name' placeholder="Cocktail Name" required></ion-input>
       </ion-item>
 
-      <ion-item id='img'>
-        <img src="{{photoUrl}}" alt="" srcset="">
+      <ion-item >
+        <button id='img' (click)='addPhotoToGallery()'>
+          <img [src]="photoUrl">
+        </button>
       </ion-item>
 
       <ion-item>
@@ -31,7 +33,7 @@
         <ion-textarea formControlName='instructions' placeholder='Write instructions here'></ion-textarea>
       </ion-item>
       
-      <ion-label  color='secondary'>Ingredients</ion-label>
+      <ion-label  color='secondary' style="margin-left: 20px; margin-top: 10px;">Ingredients</ion-label>
       <div 
         id='ingredientSelector' 
         *ngFor="let item of arrayOne(ingredientNum); let i = index">
@@ -41,11 +43,11 @@
             [interfaceOptions]='ingredientAlertOptions' 
             placeholder='Ingredients' 
             (ionChange)="onIngredient($event)">
-            <ion-select-option *ngFor='let i of (ingredients | async)?.drinks' [value]='i'>{{i.strIngredient1}}</ion-select-option>
+            <ion-select-option *ngFor='let i of (ingredients | async)?.drinks' [value]='i.strIngredient1'>{{i.strIngredient1}}</ion-select-option>
           </ion-select>
         </ion-item >
         <ion-item *ngIf="i<ingredientNum">
-          <ion-input formControlName='amount{{i}}' placeholder="Amount" required></ion-input>
+          <ion-input formControlName='amount{{i}}' placeholder="Amount"></ion-input>
         </ion-item>
       </div>
 
@@ -57,14 +59,14 @@
       <ion-item>
         <ion-label  color='secondary' position='floating'>Alcoholic</ion-label>
         <ion-select formControlName='alcoholic' [interfaceOptions]='alcoholicAlertOptions' placeholder="select" (ionChange)="onAlcoholic($event)">
-          <ion-select-option *ngFor='let i of (alcoholic | async)?.drinks' [value]='i'>{{i.strAlcoholic}}</ion-select-option>
+          <ion-select-option *ngFor='let i of (alcoholic | async)?.drinks' [value]='i.strAlcoholic'>{{i.strAlcoholic}}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label  color='secondary' position='floating'>Category</ion-label>
         <ion-select formControlName='category' [interfaceOptions]='categoryAlertOptions' placeholder="Select" (ionChange)="onCategory($event)">
-          <ion-select-option *ngFor='let i of (category | async)?.drinks' [value]='i'>{{i.strCategory}}</ion-select-option>
+          <ion-select-option *ngFor='let i of (category | async)?.drinks' [value]='i.strCategory'>{{i.strCategory}}</ion-select-option>
         </ion-select>
       </ion-item>
 
