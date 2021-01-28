@@ -1,17 +1,19 @@
-ion-app
-{
+ion-app{
     max-width: 400px;
     margin: auto;
 }
 
-ion-img
-{
+ion-img{
     width: 40px;
     height: 40px;
     margin-left: 10px;
 }
 
-ion-toolbar
-{
+ion-toolbar{
+    background: black;
     height: 50px;
+    
+}
+
+ion-header{    background: black;
 }
