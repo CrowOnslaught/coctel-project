@@ -1,4 +1,9 @@
 <ion-content id='content'>
+  <ng-container *ngIf="!routeResolveData" >
+    <div style="height: 100%; padding: 10px; padding-top: 50%;  text-align: center;">
+      <ion-spinner></ion-spinner>
+    </div>
+  </ng-container>
   <div id='selectors'>
     <ion-item>
       <ion-select
@@ -16,7 +21,12 @@
       <ion-input placeholder="Search by name" (input)='onName($event)'></ion-input>
     </ion-item>
 
-    <ion-grid id='cocktails'>
+    <div [hidden]='sceneLoaded' style="padding: 10px; padding-top: 70%;  text-align: center;">
+      <ion-spinner color='secondary'></ion-spinner>
+    </div>
+  
+
+    <ion-grid id='cocktails' [hidden]='!sceneLoaded'>
       <ion-row>
         <ion-col class='post' *ngFor="let c of POSTS | yourCTfilter : nameSelected | paginate : {
           itemsPerPage: tableSize,
@@ -33,7 +43,7 @@
 </ion-content>
 
   
-<ion-footer class="ion-no-border" >
+<ion-footer [hidden]='!sceneLoaded' class="ion-no-border" >
   <ion-toolbar color='primary'>
     <pagination-controls  style="text-align: center"
     responsive="true" 

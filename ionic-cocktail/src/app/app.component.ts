@@ -3,9 +3,11 @@ import { LogComunicationService } from './shared/services/firebase/log-comunicat
 import { Component } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+
+import { Plugins } from '@capacitor/core';
+const { SplashScreen } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -16,17 +18,20 @@ export class AppComponent {
   isLogged=false;
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private log: LogComunicationService,
-    private fireAuthService:FireAuthService,
-    private router: Router
-  ) {
-    this.initializeApp();
-     this.log.isLogged$().subscribe(data =>
+    private fireAuthService:FireAuthService) 
     {
-      this.isLogged = data;
-    });
+      SplashScreen.show({
+        showDuration: 2000,
+        autoHide: true
+      });
+
+      this.initializeApp();
+      this.log.isLogged$().subscribe(data =>
+      {
+        this.isLogged = data;
+      });
   }
 
   logout(){
@@ -36,7 +41,6 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
     });
   }
 }

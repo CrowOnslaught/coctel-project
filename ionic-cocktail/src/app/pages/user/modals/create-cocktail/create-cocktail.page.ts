@@ -104,8 +104,9 @@ export class CreateCocktailPage implements OnInit {
     console.log(l_cocktail);
 
     this.lc.setCocktail(l_cocktail);
-    this.mc.dismiss();
-  }
+    this.mc.dismiss({
+      flag: true,
+    });  }
   close()
   {
     this.mc.dismiss();

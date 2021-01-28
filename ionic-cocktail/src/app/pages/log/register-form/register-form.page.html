@@ -1,10 +1,6 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>register-form</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <div class="background">
+
   <form  [formGroup]="registerUser" (ngSubmit)="register()">
     <ion-item>
       <ion-input  placeholder='Name' formControlName="name"></ion-input>
@@ -20,4 +16,5 @@
     </ion-item>
     <ion-button [disabled]="registerUser.invalid"  type="submit">Register</ion-button>
   </form>
+  </div>
 </ion-content>
