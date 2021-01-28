@@ -19,7 +19,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private statusBar: StatusBar,
-    private log: LogComunicationService,
+    private log: LogComunicationService, 
+    private router: Router,
     private fireAuthService:FireAuthService) 
     {
       SplashScreen.show({
@@ -27,9 +28,13 @@ export class AppComponent {
         autoHide: true
       });
 
+
       this.initializeApp();
       this.log.isLogged$().subscribe(data =>
       {
+        if(data){
+        this.router.navigate(['/tabs'])
+        }
         this.isLogged = data;
       });
   }

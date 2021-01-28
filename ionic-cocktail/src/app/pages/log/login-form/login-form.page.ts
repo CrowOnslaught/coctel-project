@@ -27,8 +27,17 @@ export class LoginFormPage implements OnInit {
 
    
   }
-  ngOnInit() {
+   async ngOnInit() {
+    this.checkUser();
     this.buildForm();
+  }
+ async checkUser(){
+    const user = await this.fireAuthService.isLogged$().toPromise();
+
+    if (user && user.uid) {
+      this.route.navigate(['/tabs'])
+
+    }
   }
   insertToStorage(keyValue,value){
     Storage.set({key:keyValue, value: value});

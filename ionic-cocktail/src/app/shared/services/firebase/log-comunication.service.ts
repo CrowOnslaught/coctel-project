@@ -24,7 +24,7 @@ export class LogComunicationService {
     console.log(l_result.value);
     if(JSON.parse(l_result.value)==true){
       this.logIn(true);
-      this.route.navigate(['/tabs']);
+      this.route.navigate(['/register']);
 
 
     }

@@ -78,15 +78,17 @@ export class FireAuthService {
  
    }
   logout(flag){
-    this.afAuth.signOut();
-    Storage.remove({key :"name"})
-    Storage.remove({key :"email"})
-    Storage.remove({key :"logged"})
-    this.logCom.logIn(false)
-    if(flag){
-      this.route.navigate(['/login']);
-
-    }
+    this.afAuth.signOut().then(data=>{
+      Storage.remove({key :"name"})
+      Storage.remove({key :"email"})
+      Storage.remove({key :"logged"})
+      this.logCom.logIn(false)
+      if(flag){
+        this.route.navigate(['/login']);
+  
+      }
+    });
+    
 
   }
 

@@ -13,45 +13,20 @@ export class AuthGuard implements CanActivate {
  async canActivate(){
     const user = await this.authFireService.isLogged$().toPromise();
 
-    let url =this.router.getCurrentNavigation().extractedUrl;
 
       if (user && user.uid) {
         console.log("logout 1");
 
-        //  if you are logged you can navigate to /tabs/etc. 
-        if (url.toString().indexOf("tabs")!=-1) {
-          return true;
-
-
-        }else{
-          this.router.navigate(['/login']);
-          return false;
-
-        }
-
+         return true
       }
-      else {
-        console.log("logout 2");
-
-        console.log("navigate : ",url.toString())
-        //if you not logged you can't navigate to /tabs redirect to login
-        if (url.toString().indexOf("tabs")!=-1) {
-          this.router.navigate(['/login']);
-
-          return false;
-        }
-        console.log("False session 2")
-
-        return true;
-
-      }
+      this.router.navigate(['/login'])
 
      return false;
-  }
+  
  /*Logout() {
     // (logout logic here)
         this.router.navigate(['/login'])
     }
 */
-  
+ }
 }
