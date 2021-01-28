@@ -83,7 +83,6 @@ export class FireAuthService {
     Storage.remove({key :"email"})
     Storage.remove({key :"logged"})
     this.logCom.logIn(false)
-
     if(flag){
       this.route.navigate(['/login']);
 

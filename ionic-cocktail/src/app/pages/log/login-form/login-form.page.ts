@@ -100,8 +100,8 @@ export class LoginFormPage implements OnInit {
   private buildForm(){
     const minPassLength = 6;
     this.loginUser = this.fb.group({
-      email: ['Juanito', [Validators.required, Validators.email]],
-      password: ['', [Validators.required,Validators.minLength(minPassLength),]]
+      email: ['o@o.com', [Validators.required, Validators.email]],
+      password: ['jordi123', [Validators.required,Validators.minLength(minPassLength),]]
     });
   }
 }

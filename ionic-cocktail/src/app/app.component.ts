@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private log: LogComunicationService,
-    private fireAuthService:FireAuthService
+    private fireAuthService:FireAuthService,
+    private router: Router
   ) {
     this.initializeApp();
      this.log.isLogged$().subscribe(data =>
