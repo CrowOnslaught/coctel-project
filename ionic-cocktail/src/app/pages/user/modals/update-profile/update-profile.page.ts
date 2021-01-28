@@ -35,6 +35,7 @@ export class UpdateProfilePage implements OnInit {
       name: this.profileForm.get("name").value
     });
   }
+
   getUser(){
     let response = this.fireAuthService.getCurrentUser();
     response.then(data=>{
